@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+<h2>Форма регистрации</h2>
+<label>
+    <input type="text" placeholder="Фамилия" id="secondName" required>
+</label>
+<label>
+    <input type="text" placeholder="Имя" id="name" required>
+</label>
+<label>
+    <input type="text" placeholder="Отчество" id="surname" required>
+</label>
+<br>
+<br>
+<label for="birthdayDate">Дата рождения</label>
+<input name="Дата рождения" type="date" id="birthdayDate" value="1990-01-01">
+<br>
+<br>
+<label for="gender"></label><select name="Пол" id="gender">
+    <option value="m">Муж.</option>
+    <option value="f">Жен.</option>
+</select>
+<br>
+<br>
+<label><h4>Тариф</h4>
+    <select name="tariffPlan">
+        <option value="min">Минимальный</option>
+        <option selected value="medium">Сбалансированный</option>
+        <option value="max">Максимальный</option>
+    </select>
+</label>
+<br>
+<br>
+<label><h4>Дополнительные услуги</h4>
+    <select name="additionalServices" multiple>
+        <option value="1">Личный менеджер</option>
+        <option value="2">Круглосуточная поддержка</option>
+        <option value="3">Выделенная линия</option>
+    </select>
+</label>
+<br>
+<a target="_blank" href="tariffPlans.html" >Со списком тарифов и доп. услуг вы можете ознакомиться по ссылке</a>
+<br>
+<br>
+<label>Являетесь клиентом?</label>
+<label>
+    <input type="radio" value="false" name="areYouClient"> Да
+</label>
+<label>
+    <input type="radio" value="true" name="areYouClient" checked> Нет
+</label>
+<br>
+<br>
+<label>
+    <input name="email" type="email" id="email" placeholder="Email" required>
+</label>
+<input type="checkbox" name="subscribe" id="subscribe" checked>
+<label for="subscribe">Подписаться на рассылку
+</label>
+<br>
+<br>
+<label>Примечания
+    <br>
+    <textarea rows="10" cols="45"></textarea>
+</label>
+<br>
+<br>
+<input type="submit" name="submit">
+</body>
+</html>
