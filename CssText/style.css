@@ -1,0 +1,41 @@
+body{ background-color: #FEEED6;
+    color: #676565;
+    font-size: 15px;
+    font-family: Arial, sans-serif;
+    line-height: 1.4;
+}
+
+.text-blue{color: #378DB2;
+    font-weight: bold;
+    /*font-size: 1.2em;*/
+}
+
+.subtitle{
+    font-size: 1.2em;
+    margin-bottom: 0.25em;
+}
+
+.discount{
+    text-decoration: line-through;
+}
+
+.content{
+    max-width: 747px;
+    margin: 0  auto;
+}
+
+h1{
+    font-size: 1.8em;
+    font-weight: 200;
+    margin-bottom: 0;
+}
+
+p{
+    text-indent: 1em;
+    font-size: 0.85em;
+    margin-top: 0.25em;
+}
+
+* {
+    box-sizing: border-box;
+}
