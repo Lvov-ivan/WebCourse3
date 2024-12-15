@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Temperature Converter</title>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="cssReset.css"/>
+</head>
+<body>
+<div class="converter">
+    <div class="title">
+        <h1>Конвертер температуры</h1>
+    </div>
+
+    <div class="input">
+        <label for="input">Температура в цельсиях: </label>
+        <input type="text" placeholder="0.0" id="input">
+    </div>
+
+    <div class="convertButton">
+        <button type="button" id="convertButton">Конвертировать</button>
+    </div>
+
+    <div class="output">
+        <div class="result">
+            <label for="kelvinResult">Температура в кельвинах: </label>
+            <input type="text" disabled placeholder="273.15" id="kelvinResult">
+        </div>
+        <div class="result">
+            <label for="fahrenheitResult">Температура в фаренгейтах: </label>
+            <input type="text" disabled placeholder="32" id="fahrenheitResult">
+        </div>
+    </div>
+</div>
+</body>
+<script src="script.js"></script>
+</html>
