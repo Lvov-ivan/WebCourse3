@@ -5,31 +5,29 @@
     <title>Temperature Converter</title>
 
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="cssReset.css"/>
+    <link rel="stylesheet" href="cssReset.css">
 </head>
 <body>
 <div class="converter">
-    <div class="title">
-        <h1>Конвертер температуры</h1>
-    </div>
+    <h1 class="title">Конвертер температуры</h1>
 
     <div class="input">
-        <label for="input">Температура в цельсиях: </label>
-        <input type="text" placeholder="0.0" id="input">
+        <label for="input-celsius-field">Температура в градусах Цельсия: </label>
+        <input type="text" placeholder="0.0" id="input-celsius-field">
     </div>
 
-    <div class="convertButton">
-        <button type="button" id="convertButton">Конвертировать</button>
+    <div class="convert-button">
+        <button type="button" id="convert-button">Конвертировать</button>
     </div>
 
     <div class="output">
         <div class="result">
-            <label for="kelvinResult">Температура в кельвинах: </label>
-            <input type="text" disabled placeholder="273.15" id="kelvinResult">
+            <label for="kelvin-result">Температура в градусах Кельвина: </label>
+            <input type="text" disabled placeholder="273.15" id="kelvin-result">
         </div>
         <div class="result">
-            <label for="fahrenheitResult">Температура в фаренгейтах: </label>
-            <input type="text" disabled placeholder="32" id="fahrenheitResult">
+            <label for="fahrenheit-result">Температура в градусах Фаренгейта: </label>
+            <input type="text" disabled placeholder="32" id="fahrenheit-result">
         </div>
     </div>
 </div>
