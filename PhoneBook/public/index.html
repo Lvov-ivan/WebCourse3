@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>PhoneBook</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="node_modules/bootstrap-icons/font/bootstrap-icons.min.css">
+    <script defer src="node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+    <script defer src="node_modules/vue/dist/vue.global.js"></script>
+    <script defer src="node_modules/axios/dist/axios.js"></script>
+    <script defer src="js/script.js"></script>
+</head>
+<body>
+<div class="container" id="app">
+    <h1 class="h1">Phone Book</h1>
+
+    <div><h2 class="h5">Создание контакта</h2></div>
+
+    <form @submit.prevent="createContact" class="row row-cols-lg-auto pb-3 align-items-start">
+        <div class="col-12">
+            <input v-model.trim="firstName" :class="{'is-invalid': isFirstNameInvalid}" type="text" class="form-control"
+                   id="first-name" placeholder="Фамилия"/>
+            <div class="invalid-feedback">
+                Поле "Фамилия" не может быть пустым
+            </div>
+        </div>
+
+        <div class="col-12">
+            <input v-model.trim="lastName" :class="{'is-invalid': isLastNameInvalid}" type="text" class="form-control"
+                   id="last-name" placeholder="Имя"/>
+            <div class="invalid-feedback">
+                Поле "Имя" не может быть пустым
+            </div>
+        </div>
+
+        <div class="col-12">
+            <input v-model.trim="phoneNumber" :class="{'is-invalid': isPhoneNumberInvalid}" type="text"
+                   class="form-control" id="phone" placeholder="Телефон"/>
+            <div class="invalid-feedback">
+                Поле "Телефон" не может быть пустым <br>
+                или отличаться от формата +7xxxxxxxxxx
+            </div>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Создать</button>
+    </form>
+
+    <h5 class="h5"> Поиск контакта</h5>
+    <form @submit.prevent="getContacts" class="row row-cols-lg-auto pb-3">
+        <div class="col-lg-7">
+            <input v-model="search" type="text" class="form-control" id="search-field"
+                   placeholder="Введите данные для поиска...">
+        </div>
+        <div>
+            <button type="submit" class="btn btn-primary"><i class="bi bi-search"></i></button>
+        </div>
+    </form>
+
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th><input type="checkbox" autocomplete="off" v-model="selectAll"/></th>
+                <th>№</th>
+                <th>Фамилия</th>
+                <th>Имя</th>
+                <th>Телефон</th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody v-cloak>
+            <tr v-for="(contact, index) in contacts" :key="contact.id">
+                <td>
+                    <input type="checkbox" v-model="selectedContactsIds" :value="contact.id"/>
+                </td>
+                <td>{{ index + 1 }}</td>
+                <td>{{ contact.firstName }}</td>
+                <td>{{ contact.lastName }}</td>
+                <td>{{ contact.phoneNumber }}</td>
+                <td>
+                    <button @click="getCurrentContact(contact)" class="btn btn-primary m-1" data-bs-toggle="modal"
+                            data-bs-target="#editModal">
+                        <i class="bi bi-pencil-square"></i>
+                    </button>
+                    <button @click="getCurrentContact(contact)" class="btn btn-danger" type="button"
+                            data-bs-toggle="modal"
+                            data-bs-target="#deleteModal">
+                        <i class="bi bi-trash3"></i></button>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!--Edit Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Редактирование контакта</h5>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="current-first-name" class="col-form-label">Фамилия:</label>
+                            <input v-model.trim="editFirstName" :class="{'is-invalid': isEditedFirstNameInvalid}"
+                                   type="text" class="form-control" id="current-first-name"/>
+                            <div class="invalid-feedback">
+                                Поле "Фамилия" не может быть пустым
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="current-last-name" class="col-form-label">Имя:</label>
+                            <input v-model.trim="editLastName" :class="{'is-invalid': isEditedLastNameInvalid}"
+                                   type="text" class="form-control" id="current-last-name">
+                            <div class="invalid-feedback">
+                                Поле "Имя" не может быть пустым
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="current-phone" class="col-form-label">Телефон:</label>
+                            <input v-model.trim="editPhoneNumber" :class="{'is-invalid': isEditedPhoneNumberInvalid}"
+                                   type="text" class="form-control" id="current-phone">
+                            <div class="invalid-feedback">
+                                Поле "Телефон" не может быть пустым <br>
+                                или отличаться от формата +7xxxxxxxxxx
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button @click="editContact(currentContact)" class="btn btn-primary">
+                        <i class="bi bi-floppy"></i>
+                    </button>
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal" id="closeModal">
+                        <i class="bi bi-x-circle"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Edit modal -->
+
+    <!--Confirm delete modal -->
+    <div class="modal fade" id="deleteModal" aria-labelledby="deleteModalLabel" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-body pb-3">
+                    <p class="h2 text-center">Удалить контакт?</p>
+                    <div class="d-flex justify-content-evenly bd-highlight">
+                        <button @click="deleteContact(currentContact)"
+                                class="btn btn-danger col-4 m-2">
+                            <i class="bi bi-trash3"></i>
+                        </button>
+                        <button type="button" class="btn btn-primary col-4 m-2" data-bs-dismiss="modal">
+                            <i class="bi bi-x-circle"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--Confirm delete modal -->
+</div>
+</body>
+</html>
