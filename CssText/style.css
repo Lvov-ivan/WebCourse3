@@ -1,4 +1,4 @@
-body{ background-color: #FEEED6;
+body{
     color: #676565;
     font-size: 15px;
     font-family: Arial, sans-serif;
@@ -7,7 +7,6 @@ body{ background-color: #FEEED6;
 
 .text-blue{color: #378DB2;
     font-weight: bold;
-    /*font-size: 1.2em;*/
 }
 
 .subtitle{
@@ -20,8 +19,9 @@ body{ background-color: #FEEED6;
 }
 
 .content{
-    max-width: 747px;
-    margin: 0  auto;
+    background-color: #FEEED6;
+    max-width: 750px;
+    padding: 1px 10px 5px 1px;
 }
 
 h1{
@@ -33,7 +33,7 @@ h1{
 p{
     text-indent: 1em;
     font-size: 0.85em;
-    margin-top: 0.25em;
+    margin-top: 0;
 }
 
 * {
